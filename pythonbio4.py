@@ -1,8 +1,7 @@
 #this script generates a separate file for each refseq_mrna submitted via csv file,amalgamets them into one then moves them to a separate directory
 from bioservices import *
 from lxml import etree
-import wget, os, sys, csv
-import glob
+import wget, os, sys, csv, glob, shutil
 
 s=BioMart()
 
@@ -27,6 +26,13 @@ s.add_attribute_to_xml("rank")
 
 #opening the csv file required
 f=open('refseq.csv')
+#with open ('refseq.csv') as f:
+#	refseq_mrna=[]
+#	for line in f:
+#		spl=line.split()
+#		refseq_mrna.append(spl[0])
+#
+#print refseq_mrna
 
 #reading the csv file
 csv_f = csv.reader(f)
@@ -52,7 +58,18 @@ with open("generated_intervals.txt", "wb") as outfile:
 			outfile.write(infile.read())
 
 
+
+source = '/mnt/Data4/working_directory/stuart/python-2-7_env/scripts/interval_generator/bioservices'
+dest = '/mnt/Data4/working_directory/stuart/python-2-7_env/scripts/interval_generator/bioservices/individual_intervals'
+
+files  = os.listdir(source)
+
+for ints in files:
+	if (ints.startswith("NM")):
+		shutil.move(ints, dest)
+		
+
 #storing the NM numbers as an array to then use each to rename a file
-os.rename(row[0], mnt/Data4/working_directory/stuart/python-2-7_env/scripts/bioservices/individual_intervals/row[0])
+
 
 #create an array of header names which could be included in each file
