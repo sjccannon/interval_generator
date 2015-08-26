@@ -5,6 +5,7 @@
 #importing all modules from bioservices, etree the xml parser and other python modules
 from bioservices import *
 from lxml import etree
+from array import *
 import wget, os, os.path, sys, csv, glob, shutil
 
 #assigning the biomart module to a variable
@@ -77,8 +78,12 @@ infile = "generated_intervals.txt"
 outfile = "generated_intervals.bed"		
 with open(infile) as in_f, open(outfile, "w") as out_f:
 	for row in in_f:
+		#returning a list of the words from the string
 		column = row.split()
-		del column[3:5]
-		out_f.write(column[0] + ' ' + column[1] + ' ' + column[2] + '\n')
+		for element in column:
+			del column[3:5]
+			element = '	'.join(column)		
+		out_f.write(element + '\n')	
+#		out_f.write(column[0] + ' ' + column[1] + ' ' + column[2] + '\n')
 
 os.remove(infile)
