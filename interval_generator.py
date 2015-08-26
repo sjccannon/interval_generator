@@ -81,3 +81,4 @@ with open(infile) as in_f, open(outfile, "w") as out_f:
 		del column[3:5]
 		out_f.write(column[0] + ' ' + column[1] + ' ' + column[2] + '\n')
 
+os.remove(infile)
