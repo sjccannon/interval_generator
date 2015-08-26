@@ -1,7 +1,7 @@
 #this script generates a separate file for each refseq_mrna submitted via csv file,amalgamets them into one then moves them to a separate directory
 from bioservices import *
 from lxml import etree
-import wget, os, sys, csv, glob, shutil
+import wget, os, os.path, sys, csv, glob, shutil
 
 s=BioMart()
 
@@ -58,8 +58,12 @@ dest = '/mnt/Data4/working_directory/stuart/python-2-7_env/scripts/interval_gene
 files  = os.listdir(source)
 
 for ints in files:
-	if (ints.startswith("NM")):
-		shutil.move(ints, dest)
+	if ints.startswith("NM"): 
+		current_file = ints
+		if os.path.exists(dest + "/" + current_file) == False:
+			shutil.move(current_file, dest)
+		else:
+			 os.remove(current_file) 
 		
 
 #storing the NM numbers as an array to then use each to rename a file
