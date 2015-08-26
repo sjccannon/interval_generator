@@ -52,6 +52,7 @@ with open("generated_intervals.txt", "wb") as outfile:
 			outfile.write(infile.read())
 
 
+#storing the NM numbers as an array to then use each to rename a file
 os.rename(row[0], mnt/Data4/working_directory/stuart/python-2-7_env/scripts/bioservices/individual_intervals/row[0])
 
 #create an array of header names which could be included in each file
