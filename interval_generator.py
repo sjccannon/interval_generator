@@ -6,19 +6,21 @@
 from bioservices import *
 from lxml import etree
 from array import *
-import wget, os, os.path, sys, csv, glob, shutil
+import os, os.path, sys, csv, glob, shutil
+import wget
 
 #assigning the biomart module to a variable
 s=BioMart()
 
 #adding the required dataset to xml generator
-s.add_dataset_to_xml('hsapiens_gene_ensembl')
+s.add_dataset_to_xml('hsapiens_gene_ensembl') 
+sys.exit
 
 #adding required attributes to xml generator
 s.add_attribute_to_xml("chromosome_name")
 s.add_attribute_to_xml("exon_chrom_start")
 s.add_attribute_to_xml("exon_chrom_end")
-s.add_attribute_to_xml("strand")
+#s.add_attribute_to_xml("strand")
 s.add_attribute_to_xml("external_gene_name")
 s.add_attribute_to_xml("rank")
 
@@ -62,8 +64,8 @@ with open("generated_intervals.txt", "wb") as outfile:
 #this moves the generated interval files to their own directory for local reference
 #If the files are already present in the destination directory they are not moved and deleted instead. 
 
-source = '/mnt/Data4/working_directory/stuart/python-2-7_env/scripts/interval_generator/bioservices'
-dest = '/mnt/Data4/working_directory/stuart/python-2-7_env/scripts/interval_generator/bioservices/individual_intervals'
+source = '/mnt/Data4/working_directory/stuart/python-2-7-10/scripts/interval_generator/bioservices'
+dest = '/mnt/Data4/working_directory/stuart/python-2-7-10/scripts/interval_generator/bioservices/individual_intervals'
 files  = os.listdir(source)
 for ints in files:
 	if ints.startswith("NM"): 
